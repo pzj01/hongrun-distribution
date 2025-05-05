@@ -31,11 +31,11 @@
             快速链接
           </h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 transition-colors hover:text-sky-400">首页</a></li>
-            <li><a href="#" class="text-gray-400 transition-colors hover:text-sky-400">产品中心</a></li>
-            <li><a href="#" class="text-gray-400 transition-colors hover:text-sky-400">关于我们</a></li>
-            <li><a href="#" class="text-gray-400 transition-colors hover:text-sky-400">联系我们</a></li>
-            <li><a href="#" class="text-gray-400 transition-colors hover:text-sky-400">登录</a></li>
+            <li><a href="/" class="text-gray-400 transition-colors hover:text-sky-400">首页</a></li>
+            <li><a href="/products" class="text-gray-400 transition-colors hover:text-sky-400">产品中心</a></li>
+            <li><a href="/about" class="text-gray-400 transition-colors hover:text-sky-400">关于我们</a></li>
+            <li><a href="/contact" class="text-gray-400 transition-colors hover:text-sky-400">联系我们</a></li>
+            <li><a href="/login" class="text-gray-400 transition-colors hover:text-sky-400">登录</a></li>
           </ul>
         </div>
 

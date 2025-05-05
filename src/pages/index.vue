@@ -188,7 +188,7 @@ const carouselResponsiveOptions = ref([
           </div>
           <div class="text-center">
             <div class="text-3xl text-sky-300 font-bold md:text-4xl">
-              50+
+              10+
             </div>
             <div class="mt-2 text-sm opacity-80">
               配送车辆

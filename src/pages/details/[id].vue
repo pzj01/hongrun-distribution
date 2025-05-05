@@ -2,10 +2,14 @@
 import type { Product } from '~/types'
 import { products } from '~/data/products'
 
-const { params } = useRoute()
+const route = useRoute()
 
 // 模拟产品数据
-const product = ref<Product>(products.find(p => p.id === +params.id)!)
+const product = computed<Product>(() => products.find(p => p.id === +route.params.id)!)
+
+watch(product, () => {
+  scrollTo(0, 0)
+})
 
 // 格式化日期
 function formatDate(date) {
@@ -535,7 +539,7 @@ const relatedProducts = computed(() => {
                 </p>
                 <div class="flex items-center justify-between">
                   <span class="text-sky-600 font-bold">¥{{ p.price }} / {{ p.unit }}</span>
-                  <Button label="查看详情" icon="pi pi-eye" class="p-button-sm border-blue-900 bg-blue-900" />
+                  <Button label="查看详情" icon="pi pi-eye" class="p-button-sm border-blue-900 bg-blue-900" @click="$router.push(`/details/${p.id}`)" />
                 </div>
               </div>
             </div>
