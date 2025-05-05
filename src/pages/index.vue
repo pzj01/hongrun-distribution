@@ -377,6 +377,7 @@ const carouselResponsiveOptions = ref([
           <Button
             label="查看更多产品" icon="pi pi-arrow-right" icon-pos="right"
             class="border-blue-900 bg-blue-900 hover:border-blue-800 hover:bg-blue-800"
+            @click="$router.push('/products')"
           />
         </div>
       </div>

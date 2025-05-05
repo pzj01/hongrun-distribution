@@ -127,11 +127,11 @@ const relatedProducts = computed(() => {
                   </div>
                   <div v-if="product.testReport" class="flex items-center rounded-lg bg-gray-50 p-3">
                     <i class="pi pi-file-pdf mr-2 text-red-500" />
-                    <a href="#" class="text-sm text-sky-600 hover:underline">检测报告</a>
+                    <a :href="product.testReport" target="_blank" class="text-sm text-sky-600 hover:underline">检测报告</a>
                   </div>
                   <div v-if="product.productionLicense" class="flex items-center rounded-lg bg-gray-50 p-3">
                     <i class="pi pi-id-card mr-2 text-blue-500" />
-                    <a href="#" class="text-sm text-sky-600 hover:underline">生产许可证</a>
+                    <span class="text-sm text-sky-600">生产许可认证</span>
                   </div>
                 </div>
               </div>

@@ -63,7 +63,7 @@ const items = computed(() => [
     >
       <template #start>
         <h1 p-4 text-center font-bold>
-          食品安全管理系统
+          宏润食品安全管理系统
         </h1>
       </template>
     </Menu>

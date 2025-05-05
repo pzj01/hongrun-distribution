@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Category, Product } from '~/types'
+import type { Product } from '~/types'
 import { products } from '~/data/products'
-import { CategoryList } from '~/types'
+import { Category, CategoryList } from '~/types'
 
 // 产品分类数据
 const categories = ref<Category[]>(CategoryList)
@@ -9,7 +9,7 @@ const categories = ref<Category[]>(CategoryList)
 const allProducts = ref<Product[]>([...products])
 
 // 筛选相关状态
-const selectedCategory = ref<Category | null>(null)
+const selectedCategory = ref<Category | null>(Category.Meatballs)
 const keyword = useLocalStorage('keyword', '')
 const searchQuery = ref(keyword.value)
 
@@ -19,7 +19,7 @@ watch(searchQuery, (value) => {
 
 // 分页相关状态
 const first = ref(0)
-const rows = ref(9)
+const rows = ref(6)
 // 筛选产品
 const filteredProducts = computed<Product[]>(() => {
   let result = [...allProducts.value]
@@ -31,16 +31,17 @@ const filteredProducts = computed<Product[]>(() => {
 
   // 按搜索关键词筛选
   if (searchQuery.value.trim()) {
-    const query = searchQuery.value.toLowerCase().trim()
+    const query = searchQuery.value.trim()
     result = result.filter(product =>
-      product.name.toLowerCase().includes(query)
-      || product.description.toLowerCase().includes(query)
-      || product.tags.some(tag => tag.toLowerCase().includes(query)),
+      product.name.includes(query),
     )
   }
 
+  // 按分页筛选
   return result
 })
+
+const partialProducts = computed(() => filteredProducts.value.slice(first.value, first.value + rows.value))
 const totalProducts = computed(() => filteredProducts.value.length)
 
 // 应用筛选
@@ -134,7 +135,7 @@ onMounted(() => {
         <div v-if="filteredProducts.length > 0">
           <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
             <div
-              v-for="product in filteredProducts"
+              v-for="product in partialProducts"
               :key="product.id"
               class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow hover:shadow-lg"
             >
@@ -180,7 +181,7 @@ onMounted(() => {
               v-model:first="first"
               :rows="rows"
               :total-records="totalProducts"
-              :rows-per-page-options="[9, 18, 27]"
+              :rows-per-page-options="[5, 10, 15]"
               @page="onPageChange($event)"
             />
           </div>

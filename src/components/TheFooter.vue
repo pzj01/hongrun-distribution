@@ -50,7 +50,7 @@
             </li>
             <li class="flex">
               <i class="pi pi-phone mr-3 mt-1 text-sky-500" />
-              <span class="text-gray-400">0791-xxxxxxx</span>
+              <span class="text-gray-400">18307994169</span>
             </li>
             <li class="flex">
               <i class="pi pi-envelope mr-3 mt-1 text-sky-500" />
