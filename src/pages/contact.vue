@@ -219,9 +219,9 @@ const faqs = ref<FAQ[]>([
           <!-- 地图 -->
           <div>
             <div class="overflow-hidden rounded-xl bg-white shadow-lg">
-              <div class="relative">
+              <div class="relative" h-56>
                 <!-- 这里使用一个静态地图图片作为占位符，实际应用中可替换为真实地图组件 -->
-                <LeafletMap h-96 />
+                <LeafletMap />
 
                 <!-- 地图标记 -->
                 <!-- <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -232,16 +232,6 @@ const faqs = ref<FAQ[]>([
                   </div>
                   <div class="absolute left-1/2 h-4 w-4 transform rounded-full bg-blue-900 -bottom-2 -translate-x-1/2" />
                 </div> -->
-
-                <!-- 地图控制按钮 -->
-                <div class="absolute bottom-4 right-4 flex space-x-2">
-                  <button class="h-8 w-8 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100">
-                    <i class="pi pi-plus" />
-                  </button>
-                  <button class="h-8 w-8 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100">
-                    <i class="pi pi-minus" />
-                  </button>
-                </div>
               </div>
 
               <div class="border-t border-gray-100 p-4">
