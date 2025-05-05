@@ -9,7 +9,7 @@ onMounted(() => {
 
 function setChartData() {
   return {
-    labels: ['燕饺', '带鱼段', '水晶包', '冰冻猪肚', '冰冻猪肚', '冰冻猪肚'],
+    labels: ['燕饺', '带鱼段', '水晶包', '冰冻猪肚', '福州鱼丸', '淡水丸'],
     datasets: [
       {
         label: '销量',

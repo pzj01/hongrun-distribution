@@ -21,7 +21,7 @@ function setChartData() {
   const documentStyle = getComputedStyle(document.documentElement)
   return {
     labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-    datasets: ['燕饺', '带鱼段', '水晶包', '冰冻猪肚', '冰冻猪肚', '冰冻猪肚'].map(name => ({
+    datasets: ['燕饺', '带鱼段', '水晶包', '冰冻猪肚', '福州鱼丸', '淡水丸'].map(name => ({
       label: name,
       data: [65, 59, 80, 81, 56, 55, 40, 12, 60, 59, 80, 81].map(n => Math.floor(n * Math.random() * 1000)),
       fill: false,
