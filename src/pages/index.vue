@@ -290,7 +290,7 @@ const carouselResponsiveOptions = ref([
           >
             <template #header>
               <div class="bg-gradient-to-br p-6" :class="service.gradientClass">
-                <i style="font-size: 1.5rem" class="text-4xl text-white" :class="[service.icon]" />
+                <i style="font-size: 1.5rem;" class="text-4xl text-white" :class="service.icon" />
               </div>
             </template>
             <template #title>

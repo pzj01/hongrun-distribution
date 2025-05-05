@@ -3,6 +3,9 @@ import Material from '@primevue/themes/material'
 
 export default definePreset(Material, {
   semantic: {
+    // icon: {
+    //   size: '1.5rem',
+    // },
     transitionDuration: '300ms',
     primary: {
       50: '{sky.50}',
