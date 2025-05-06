@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Product } from '~/types'
 import { products } from '~/data/products'
+import { PackagingType, PackagingTypeList, type Product } from '~/types'
 
 const route = useRoute()
 
@@ -44,6 +44,133 @@ const stockStatusClass = computed(() => {
 
 const relatedProducts = computed(() => {
   return products.filter(p => p.category === product.value.category).slice(0, 4)
+})
+
+// 产品批次相关
+// 批次筛选控制
+// const showBatchFilter = ref(false)
+// function toggleBatchFilter() {
+//   showBatchFilter.value = !showBatchFilter.value
+// }
+
+// 批次筛选条件
+// const batchFilters = ref({
+//   dateRange: null,
+//   stockStatus: null,
+//   packagingType: null,
+// })
+
+// enum StockStatus {
+//   High = '库存充足',
+//   Medium = '库存适中',
+//   Low = '库存不足',
+// }
+
+// 库存状态选项
+// const stockStatusOptions = ref([StockStatus.High, StockStatus.Medium, StockStatus.Low])
+
+// 包装类型选项
+// const packagingTypeOptions = ref(PackagingTypeList)
+
+// 重置批次筛选
+// function resetBatchFilters() {
+//   batchFilters.value = {
+//     dateRange: null,
+//     stockStatus: null,
+//     packagingType: null,
+//   }
+// }
+
+// 应用批次筛选
+// function applyBatchFilters() {
+//   // 实际应用中这里会调用API获取筛选后的数据
+//   console.log('应用批次筛选:', batchFilters.value)
+//   showBatchFilter.value = false
+// }
+
+// 模拟产品批次数据
+interface ProductBatch {
+  batchId: string
+  productionDate: Date
+  expiryDate: Date
+  quantity: number
+  packagingType: string
+}
+
+const batchId = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
+
+const productBatches = computed<ProductBatch[]>(() => {
+  const batch = batchId[random(0, batchId.length - 1)]
+  // eslint-disable-next-line ts/no-non-null-asserted-optional-chain
+  const shelfLife = +product.value.shelfLife.match(/\d+/)?.[0]!
+  const packagingType = PackagingTypeList[random(0, PackagingTypeList.length - 1)]
+  return Array.from({ length: random(3, 10) }, (_, i) => {
+    const year = product.value.date.getFullYear()
+    const month = product.value.date.getMonth() + i
+    const day = product.value.date.getDate() + 1
+
+    return {
+      batchId: `${batch}${i + 1}${year}${month}${day}${product.value.id}`,
+      productionDate: product.value.date,
+      expiryDate: new Date(year, month + shelfLife, day),
+      quantity: random(100, 500),
+      packagingType,
+    }
+  })
+})
+
+// 获取库存百分比
+function getStockPercentage(quantity: number): number {
+  const maxStock = 300 // 假设单批次最大库存为300
+  return Math.min(Math.round((quantity / maxStock) * 100), 100)
+}
+
+// 获取库存状态颜色
+function getStockStatusColor(quantity: number): string {
+  const percentage = getStockPercentage(quantity)
+  if (percentage > 70)
+    return 'bg-green-500'
+  if (percentage > 30)
+    return 'bg-yellow-500'
+  if (percentage > 0)
+    return 'bg-red-500'
+  return 'bg-gray-500'
+}
+
+// 获取包装类型标签样式
+function getPackagingSeverity(packagingType: string): string {
+  switch (packagingType) {
+    case PackagingType.Vacuum:
+      return 'info'
+    case PackagingType.Compressed:
+      return 'success'
+    case PackagingType.PlasticBag:
+      return 'warning'
+    case PackagingType.PaperBag:
+      return 'primary'
+    default:
+      return 'secondary'
+  }
+}
+
+// 检查是否即将到期
+function isExpiringSoon(date: Date): boolean {
+  const today = new Date()
+  const thirtyDaysLater = new Date()
+  thirtyDaysLater.setDate(today.getDate() + 30)
+  return date <= thirtyDaysLater && date >= today
+}
+
+// 计算总批次库存
+const totalBatchStock = computed(() => {
+  return productBatches.value.reduce((sum, batch) => sum + batch.quantity, 0)
+})
+
+// 获取最新批次日期
+const latestBatchDate = computed(() => {
+  const dates = productBatches.value.map(batch => batch.productionDate)
+  return new Date(Math.max(...dates.map(date => date.getTime())))
 })
 </script>
 
@@ -501,6 +628,199 @@ const relatedProducts = computed(() => {
                     </div>
                   </TabPanel>
                 </TabView>
+              </div>
+            </div>
+            <div lg:col-span-12>
+              <!-- 产品批次信息 -->
+              <div class="mb-6 rounded-xl bg-white p-6 shadow-md">
+                <div class="mb-4 flex items-center justify-between">
+                  <h3 class="flex items-center text-lg text-blue-900 font-bold">
+                    <i class="pi pi-box mr-2 text-sky-500" />产品批次信息
+                  </h3>
+                  <!-- <Button
+                    icon="pi pi-filter"
+                    label="筛选批次"
+                    outlined
+                    class="p-button-sm border-blue-900 text-blue-900"
+                    @click="toggleBatchFilter"
+                  /> -->
+                </div>
+
+                <!-- 批次筛选面板
+                <div v-if="showBatchFilter" class="mb-4 rounded-lg bg-gray-50 p-4">
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                    <div>
+                      <label class="mb-1 block text-sm text-gray-700 font-medium">生产日期范围</label>
+                      <Calendar
+                        v-model="batchFilters.dateRange"
+                        selection-mode="range"
+                        date-format="yy-mm-dd"
+                        placeholder="选择日期范围"
+                        class="w-full"
+                      />
+                    </div>
+                    <div>
+                      <label class="mb-1 block text-sm text-gray-700 font-medium">库存状态</label>
+                      <Dropdown
+                        v-model="batchFilters.stockStatus"
+                        :options="stockStatusOptions"
+                        placeholder="选择库存状态"
+                        class="w-full"
+                      />
+                    </div>
+                    <div>
+                      <label class="mb-1 block text-sm text-gray-700 font-medium">包装方式</label>
+                      <Dropdown
+                        v-model="batchFilters.packagingType"
+                        :options="packagingTypeOptions"
+                        placeholder="选择包装方式"
+                        class="w-full"
+                      />
+                    </div>
+                  </div>
+                  <div class="mt-4 flex justify-end">
+                    <Button
+                      label="重置"
+                      icon="pi pi-refresh"
+                      text
+                      class="mr-2"
+                      @click="resetBatchFilters"
+                    />
+                    <Button
+                      label="应用筛选"
+                      icon="pi pi-check"
+                      class="p-button-sm border-blue-900 bg-blue-900"
+                      @click="applyBatchFilters"
+                    />
+                  </div>
+                </div> -->
+
+                <!-- 批次表格 -->
+                <DataTable
+                  :value="productBatches"
+                  :paginator="true"
+                  :rows="5"
+                  :rows-per-page-options="[5, 10, 20]"
+                  responsive-layout="scroll"
+                  striped-rows
+                  class="p-datatable-sm"
+                >
+                  <Column field="batchId" header="批次号" sortable style="width: 15%">
+                    <template #body="{ data }">
+                      <span class="text-blue-900 font-medium">#{{ data.batchId }}</span>
+                    </template>
+                  </Column>
+
+                  <Column field="productionDate" header="生产日期" sortable style="width: 20%">
+                    <template #body="{ data }">
+                      <div class="flex items-center">
+                        <i class="pi pi-calendar mr-2 text-gray-500" />
+                        <span>{{ formatDate(data.productionDate) }}</span>
+                      </div>
+                    </template>
+                  </Column>
+
+                  <Column field="expiryDate" header="到期日期" sortable style="width: 20%">
+                    <template #body="{ data }">
+                      <div class="flex items-center">
+                        <i class="pi pi-calendar-times mr-2 text-gray-500" />
+                        <span>{{ formatDate(data.expiryDate) }}</span>
+                        <Tag
+                          v-if="isExpiringSoon(data.expiryDate)"
+                          value="即将到期"
+                          severity="warning"
+                          class="ml-2"
+                        />
+                      </div>
+                    </template>
+                  </Column>
+
+                  <Column field="quantity" header="库存数量" sortable style="width: 20%">
+                    <template #body="{ data }">
+                      <div>
+                        <div class="flex items-center">
+                          <span class="font-medium">{{ data.quantity }}</span>
+                          <span class="ml-1 text-gray-500">{{ product.unit }}</span>
+                        </div>
+                        <div class="mt-1 h-1.5 w-full rounded-full bg-gray-200">
+                          <div
+                            class="h-full rounded-full"
+                            :class="getStockStatusColor(data.quantity)"
+                            :style="{ width: `${getStockPercentage(data.quantity)}%` }"
+                          />
+                        </div>
+                      </div>
+                    </template>
+                  </Column>
+
+                  <Column field="packagingType" header="包装方式" style="width: 15%">
+                    <template #body="{ data }">
+                      <Tag :value="data.packagingType" :severity="getPackagingSeverity(data.packagingType)" />
+                    </template>
+                  </Column>
+
+                  <!-- <Column header="操作" style="width: 10%">
+                    <template #body="{ data }">
+                      <div class="flex space-x-1">
+                        <Button
+                          v-tooltip.top="'查看详情'"
+                          icon="pi pi-eye"
+                          class="p-button-rounded p-button-text p-button-sm"
+                        />
+                        <Button
+                          v-tooltip.top="'下载批次报告'"
+                          icon="pi pi-download"
+                          class="p-button-rounded p-button-text p-button-sm"
+                        />
+                      </div>
+                    </template>
+                  </Column> -->
+                </DataTable>
+
+                <!-- 批次统计信息 -->
+                <div class="grid grid-cols-1 mt-4 gap-4 md:grid-cols-3">
+                  <div class="flex items-center rounded-lg bg-gray-50 p-4">
+                    <div class="mr-3 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100">
+                      <i class="pi pi-box text-blue-900" />
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">
+                        总批次数
+                      </p>
+                      <p class="text-lg text-blue-900 font-bold">
+                        {{ productBatches.length }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center rounded-lg bg-gray-50 p-4">
+                    <div class="mr-3 h-10 w-10 flex items-center justify-center rounded-full bg-green-100">
+                      <i class="pi pi-shopping-cart text-green-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">
+                        总库存量
+                      </p>
+                      <p class="text-lg text-green-600 font-bold">
+                        {{ totalBatchStock }} {{ product.unit }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center rounded-lg bg-gray-50 p-4">
+                    <div class="mr-3 h-10 w-10 flex items-center justify-center rounded-full bg-yellow-100">
+                      <i class="pi pi-calendar text-yellow-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">
+                        最新批次
+                      </p>
+                      <p class="text-lg text-yellow-600 font-bold">
+                        {{ formatDate(latestBatchDate) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

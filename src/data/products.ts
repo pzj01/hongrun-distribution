@@ -3,6 +3,297 @@ import { Category, PackagingType, Unit, WeightUnit } from '../types'
 
 export const products: Product[] = [
   {
+    id: 33,
+    name: '猪肉',
+    description: '优质冷冻猪肉，肉质鲜嫩，适合火锅、红烧或烧烤。',
+    category: Category.MeatProducts,
+    price: 39.99,
+    unit: Unit.PACKAGE,
+    weight: 1000,
+    weightUnit: WeightUnit.G,
+    stockQuantity: 150,
+    nutritionalInfo: {
+      description: '营养丰富，提供优质蛋白质和能量。',
+      gContent: '每100克含量',
+      ingredients: [
+        { name: '热量', weight: 250, unit: WeightUnit.KCAL },
+        { name: '蛋白质', weight: 20, unit: WeightUnit.G },
+        { name: '脂肪', weight: 18, unit: WeightUnit.G },
+        { name: '碳水化合物', weight: 0, unit: WeightUnit.G },
+        { name: '钠', weight: 60, unit: WeightUnit.MG },
+      ],
+    },
+    certifications: ['HACCP', 'ISO22000'],
+    brand: '通用',
+    origin: '中国山东',
+    packagingType: PackagingType.Vacuum,
+    sku: 'PORK1000G',
+    tags: ['冷冻', '猪肉', '生肉'],
+    date: new Date('2025-05-06T10:00:00Z'),
+    shelfLife: '12个月',
+    storageMethod: '冷冻保存于-18℃以下',
+    rawMaterials: [
+      {
+        name: '猪肉',
+        description: '精选优质猪肉，肉质鲜嫩。',
+        origin: '中国山东',
+        ingredient: {
+          name: '猪肉',
+          origin: '中国山东',
+          function: '提供主要蛋白质和风味',
+        },
+      },
+    ],
+    cookingTips: [
+      '解冻后切片用于火锅或炒菜。',
+      '腌制后烧烤可提升风味。',
+    ],
+    productionSteps: [
+      {
+        name: '原料挑选',
+        description: '精选健康生猪，剔除多余脂肪。',
+      },
+      {
+        name: '切割包装',
+        description: '按规格切割后真空包装，保持新鲜。',
+      },
+      {
+        name: '快速冷冻',
+        description: '采用-35℃快速冷冻技术，锁住营养。',
+      },
+    ],
+    processCharacteristics: [
+      {
+        name: '快速冷冻',
+        description: '低温快速冷冻，保留肉质鲜嫩口感。',
+      },
+      {
+        name: '无添加',
+        description: '不添加防腐剂，纯天然肉质。',
+      },
+    ],
+    image: '/products/猪肉/image.jpg',
+    // testReport: '/products/猪肉/test.png',
+    productionLicense: 'SC12345678901239',
+  },
+  {
+    id: 34,
+    name: '羊肉',
+    description: '精选草原羊肉，肉质细腻，适合涮锅或烤串。',
+    category: Category.MeatProducts,
+    price: 49.99,
+    unit: Unit.PACKAGE,
+    weight: 800,
+    weightUnit: WeightUnit.G,
+    stockQuantity: 100,
+    nutritionalInfo: {
+      description: '富含蛋白质和微量元素，适合健康饮食。',
+      gContent: '每100克含量',
+      ingredients: [
+        { name: '热量', weight: 200, unit: WeightUnit.KCAL },
+        { name: '蛋白质', weight: 22, unit: WeightUnit.G },
+        { name: '脂肪', weight: 12, unit: WeightUnit.G },
+        { name: '碳水化合物', weight: 0, unit: WeightUnit.G },
+        { name: '钠', weight: 70, unit: WeightUnit.MG },
+      ],
+    },
+    certifications: ['HACCP'],
+    brand: '通用',
+    origin: '中国内蒙古',
+    packagingType: PackagingType.Vacuum,
+    sku: 'MUTTON800G',
+    tags: ['冷冻', '羊肉', '生肉'],
+    date: new Date('2025-05-06T10:00:00Z'),
+    shelfLife: '12个月',
+    storageMethod: '冷冻保存于-18℃以下',
+    rawMaterials: [
+      {
+        name: '羊肉',
+        description: '选用内蒙古草原羊肉，肉质细腻。',
+        origin: '中国内蒙古',
+        ingredient: {
+          name: '羊肉',
+          origin: '中国内蒙古',
+          function: '提供独特风味和高蛋白',
+        },
+      },
+    ],
+    cookingTips: [
+      '解冻后切薄片用于火锅，口感更佳。',
+      '搭配孜然烧烤，突出草原风味。',
+    ],
+    productionSteps: [
+      {
+        name: '原料挑选',
+        description: '精选草原放牧羊只，肉质纯正。',
+      },
+      {
+        name: '切割包装',
+        description: '按规格切割后真空包装，确保新鲜。',
+      },
+      {
+        name: '快速冷冻',
+        description: '采用-35℃快速冷冻，保留营养和口感。',
+      },
+    ],
+    processCharacteristics: [
+      {
+        name: '草原放牧',
+        description: '羊肉来自天然草原，品质优良。',
+      },
+      {
+        name: '无添加',
+        description: '不含任何人工添加剂，天然健康。',
+      },
+    ],
+    image: '/products/羊肉/image.jpg',
+  },
+  {
+    id: 35,
+    name: '驴肉',
+    description: '优质冷冻驴肉，肉质紧实，适合酱制或炖煮。',
+    category: Category.MeatProducts,
+    price: 59.99,
+    unit: Unit.PACKAGE,
+    weight: 600,
+    weightUnit: WeightUnit.G,
+    stockQuantity: 80,
+    nutritionalInfo: {
+      description: '低脂肪高蛋白，适合营养均衡饮食。',
+      gContent: '每100克含量',
+      ingredients: [
+        { name: '热量', weight: 180, unit: WeightUnit.KCAL },
+        { name: '蛋白质', weight: 23, unit: WeightUnit.G },
+        { name: '脂肪', weight: 9, unit: WeightUnit.G },
+        { name: '碳水化合物', weight: 0, unit: WeightUnit.G },
+        { name: '钠', weight: 65, unit: WeightUnit.MG },
+      ],
+    },
+    certifications: ['ISO22000'],
+    brand: '通用',
+    origin: '中国河北',
+    packagingType: PackagingType.Vacuum,
+    sku: 'DONKEY600G',
+    tags: ['冷冻', '驴肉', '生肉'],
+    date: new Date('2025-05-06T10:00:00Z'),
+    shelfLife: '12个月',
+    storageMethod: '冷冻保存于-18℃以下',
+    rawMaterials: [
+      {
+        name: '驴肉',
+        description: '选用河北优质驴肉，肉质紧实。',
+        origin: '中国河北',
+        ingredient: {
+          name: '驴肉',
+          origin: '中国河北',
+          function: '提供高蛋白和独特口感',
+        },
+      },
+    ],
+    cookingTips: [
+      '解冻后炖煮，搭配酱料更美味。',
+      '可切片搭配面食，制作经典驴肉火烧。',
+    ],
+    productionSteps: [
+      {
+        name: '原料挑选',
+        description: '精选健康驴肉，剔除筋膜。',
+      },
+      {
+        name: '切割包装',
+        description: '按规格切割后真空包装，保持品质。',
+      },
+      {
+        name: '快速冷冻',
+        description: '采用-35℃快速冷冻技术，锁住营养。',
+      },
+    ],
+    processCharacteristics: [
+      {
+        name: '低温冷冻',
+        description: '快速冷冻确保肉质紧实和新鲜。',
+      },
+      {
+        name: '无添加',
+        description: '纯天然驴肉，无任何添加剂。',
+      },
+    ],
+    image: '/products/驴肉/image.jpg',
+  },
+  {
+    id: 36,
+    name: '牛肉',
+    description: '精选冷冻牛肉，肉质鲜美，适合煎烤、涮锅或炖煮。',
+    category: Category.MeatProducts,
+    price: 69.99,
+    unit: Unit.PACKAGE,
+    weight: 1000,
+    weightUnit: WeightUnit.G,
+    stockQuantity: 120,
+    nutritionalInfo: {
+      description: '高蛋白低脂肪，适合健身和健康饮食。',
+      gContent: '每100克含量',
+      ingredients: [
+        { name: '热量', weight: 220, unit: WeightUnit.KCAL },
+        { name: '蛋白质', weight: 24, unit: WeightUnit.G },
+        { name: '脂肪', weight: 14, unit: WeightUnit.G },
+        { name: '碳水化合物', weight: 0, unit: WeightUnit.G },
+        { name: '钠', weight: 55, unit: WeightUnit.MG },
+      ],
+    },
+    certifications: ['HACCP', 'ISO22000'],
+    brand: '通用',
+    origin: '中国吉林',
+    packagingType: PackagingType.Vacuum,
+    sku: 'BEEF1000G',
+    tags: ['冷冻', '牛肉', '生肉'],
+    date: new Date('2025-05-06T10:00:00Z'),
+    shelfLife: '12个月',
+    storageMethod: '冷冻保存于-18℃以下',
+    rawMaterials: [
+      {
+        name: '牛肉',
+        description: '精选吉林优质牛肉，肉质鲜美。',
+        origin: '中国吉林',
+        ingredient: {
+          name: '牛肉',
+          origin: '中国吉林',
+          function: '提供高蛋白和丰富口感',
+        },
+      },
+    ],
+    cookingTips: [
+      '解冻后切薄片用于火锅或煎烤。',
+      '炖煮时加入香料可提升风味。',
+    ],
+    productionSteps: [
+      {
+        name: '原料挑选',
+        description: '精选优质肉牛，剔除多余脂肪。',
+      },
+      {
+        name: '切割包装',
+        description: '按规格切割后真空包装，确保新鲜。',
+      },
+      {
+        name: '快速冷冻',
+        description: '采用-35℃快速冷冻，保留营养和口感。',
+      },
+    ],
+    processCharacteristics: [
+      {
+        name: '快速冷冻',
+        description: '低温快速冷冻，保留牛肉鲜美口感。',
+      },
+      {
+        name: '无添加',
+        description: '不含防腐剂，纯天然牛肉。',
+      },
+    ],
+    image: '/products/牛肉/image.jpg',
+    // testReport: '/products/牛肉/test.png',
+  },
+  {
     id: 1,
     name: '燕饺',
     description: '精选优质猪肉和虾仁，搭配新鲜蔬菜，皮薄馅嫩，口感鲜美，适合家庭和食堂用餐。',

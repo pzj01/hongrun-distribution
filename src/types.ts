@@ -111,6 +111,7 @@ export enum Unit {
 }
 
 export enum WeightUnit {
+  KCAL = '千卡',
   KG = '千克',
   G = '克',
   MG = '毫克',
@@ -134,6 +135,7 @@ export const UnitList = [
 ]
 
 export const WeightUnitList = [
+  WeightUnit.KCAL,
   WeightUnit.G,
   WeightUnit.KG,
   WeightUnit.L,
