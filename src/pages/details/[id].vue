@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { products } from '~/data/products'
-import { PackagingType, PackagingTypeList, type Product } from '~/types'
+import { PackagingType, type Product } from '~/types'
 
 const route = useRoute()
 
@@ -104,7 +104,6 @@ const productBatches = computed<ProductBatch[]>(() => {
   const batch = batchId[random(0, batchId.length - 1)]
   // eslint-disable-next-line ts/no-non-null-asserted-optional-chain
   const shelfLife = +product.value.shelfLife.match(/\d+/)?.[0]!
-  const packagingType = PackagingTypeList[random(0, PackagingTypeList.length - 1)]
   return Array.from({ length: random(3, 10) }, (_, i) => {
     const year = product.value.date.getFullYear()
     const month = product.value.date.getMonth() + i
@@ -115,7 +114,7 @@ const productBatches = computed<ProductBatch[]>(() => {
       productionDate: product.value.date,
       expiryDate: new Date(year, month + shelfLife, day),
       quantity: random(100, 500),
-      packagingType,
+      packagingType: product.value.packagingType,
     }
   })
 })

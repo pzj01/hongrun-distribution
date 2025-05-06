@@ -53,6 +53,7 @@ declare module 'vue' {
     Slider: typeof import('primevue/slider')['default']
     TabPanel: typeof import('primevue/tabpanel')['default']
     TabView: typeof import('primevue/tabview')['default']
+    Tag: typeof import('primevue/tag')['default']
     Textarea: typeof import('primevue/textarea')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheNav: typeof import('./src/components/TheNav.vue')['default']
