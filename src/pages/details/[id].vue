@@ -43,7 +43,7 @@ const stockStatusClass = computed(() => {
 })
 
 const relatedProducts = computed(() => {
-  return products.filter(p => p.category === product.value.category).slice(0, 4)
+  return products.filter(p => p.id !== product.value.id && p.category === product.value.category).slice(0, 4)
 })
 
 // 产品批次相关
