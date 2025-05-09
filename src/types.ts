@@ -84,6 +84,7 @@ export interface Product extends Item {
 export enum Category {
   Meatballs = '禽类制品',
   MeatProducts = '肉类制品',
+  VegetableProducts = '蔬菜',
   SeaFoodProducts = '鱼类及水产制品',
   DumplingsAndBuns = '早点与其他',
 }
@@ -91,6 +92,7 @@ export enum Category {
 export const CategoryList: Category[] = [
   Category.Meatballs,
   Category.MeatProducts,
+  Category.VegetableProducts,
   Category.SeaFoodProducts,
   Category.DumplingsAndBuns,
 ]

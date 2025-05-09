@@ -94,6 +94,33 @@ export const suppliersMap = suppliers.reduce<Record<Supplier['id'], Supplier>>((
 
 export const DEFAULT_PURCHASE: Purchase[] = [
   {
+    id: 98,
+    supplier_id: 1,
+    product_id: 37,
+    date: new Date(2024, 3, 15),
+    quantity: 10,
+    unit_price: 10,
+    remarks: '太贵了',
+  },
+  {
+    id: 100,
+    supplier_id: 3,
+    product_id: 38,
+    date: new Date(2025, 3, 15),
+    quantity: 5,
+    unit_price: 30,
+    remarks: '非常好',
+  },
+  {
+    id: 99,
+    supplier_id: 2,
+    product_id: 39,
+    date: new Date(2025, 3, 15),
+    quantity: 15,
+    unit_price: 18,
+    remarks: '到了一半',
+  },
+  {
     id: 989,
     supplier_id: 1,
     product_id: 33,
