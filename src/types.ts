@@ -95,13 +95,15 @@ export const CategoryList: Category[] = [
   Category.PoultryProducts,
   Category.MeatProducts,
   Category.VegetableProducts,
-  // Category.Seasoning,
-  // Category.Oil,
+  Category.Seasoning,
+  Category.Oil,
   Category.Breakfast,
   Category.Other,
 ]
 
 export enum PackagingType {
+  Bottle = '瓶装',
+  Box = '盒装',
   Vacuum = '真空包装',
   Compressed = '压缩包装',
   PlasticBag = '塑料袋装',
@@ -126,6 +128,8 @@ export enum WeightUnit {
 }
 
 export const PackagingTypeList = [
+  PackagingType.Bottle,
+  PackagingType.Box,
   PackagingType.Compressed,
   PackagingType.PaperBag,
   PackagingType.PlasticBag,
